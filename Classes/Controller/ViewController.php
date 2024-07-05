@@ -20,7 +20,6 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -72,7 +71,7 @@ class ViewController extends ActionController
      */
     public function initializeAction(): void
     {
-        $this->contentObjectRenderer = $this->configurationManager->getContentObject();
+        $this->contentObjectRenderer = $this->request->getAttribute('currentContentObject');
 
         $this->language = ($this->getLanguageService()->lang === 'default') ? 'en' : $this->getLanguageService()->lang;
 
@@ -227,7 +226,7 @@ class ViewController extends ActionController
             'libraryUrl'         => $url . PathUtility::getPublicResourceWebPath('EXT:h5p/Resources/Public/Lib/h5p-core/js'),
             'contents'           => []
         ];
-        
+
 
         if (GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'isLoggedIn')) {
             $user = $GLOBALS['TSFE']->fe_user->user;

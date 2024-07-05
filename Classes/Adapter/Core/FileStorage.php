@@ -796,4 +796,8 @@ class FileStorage implements \H5PFileStorage, SingletonInterface
         // Store in local storage folder
         return file_put_contents($filePath, $stream);
     }
+
+    public function deleteLibrary($library)
+    {
+    }
 }

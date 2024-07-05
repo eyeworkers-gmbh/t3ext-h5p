@@ -205,7 +205,7 @@ class Framework implements \H5PFrameworkInterface, SingletonInterface
      * @param string $stream Path to where the file should be saved.
      * @return string The content (response body). NULL if something went wrong
      */
-    public function fetchExternalData($url, $data = null, $blocking = true, $stream = '')
+    public function fetchExternalData($url, $data = NULL, $blocking = TRUE, $stream = NULL, $fullData = FALSE, $headers = array(), $files = array(), $method = 'POST')
     {
         $client = GeneralUtility::makeInstance(GuzzleClientFactory::class)->getClient();
         $options = [
@@ -1476,5 +1476,21 @@ class Framework implements \H5PFrameworkInterface, SingletonInterface
             return implode(', ', $paths);
         }
         return '';
+    }
+
+    public function replaceContentHubMetadataCache($metadata, $lang)
+    {
+    }
+
+    public function getContentHubMetadataCache($lang = 'en')
+    {
+    }
+
+    public function getContentHubMetadataChecked($lang = 'en')
+    {
+    }
+
+    public function setContentHubMetadataChecked($time, $lang = 'en')
+    {
     }
 }
