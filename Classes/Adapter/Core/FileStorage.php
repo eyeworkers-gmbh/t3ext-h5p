@@ -154,7 +154,9 @@ class FileStorage implements \H5PFileStorage, SingletonInterface
             $dir = str_replace($source, '', $pathName);
             $dir = ltrim($dir, '/');
             if ($fileInfo->isDir()) {
-                $this->storage->createFolder($dir, $libraryFolder);
+                if (!file_exists($pathName)) {
+                    $this->storage->createFolder($dir, $libraryFolder);
+                }
             }
             if ($fileInfo->isFile()) {
                 $targetDirectory = ltrim(str_replace($source, '', $fileInfo->getPath()), '/');
@@ -163,7 +165,7 @@ class FileStorage implements \H5PFileStorage, SingletonInterface
                 } else {
                     $destinationFolder = $libraryFolder->getSubfolder($targetDirectory);
                 }
-                $destinationFolder->addFile($fileInfo->getPathname(), $fileInfo->getFilename());
+                $destinationFolder->addFile($fileInfo->getPathname(), $fileInfo->getFilename(), DuplicationBehavior::REPLACE);
             }
         }
     }

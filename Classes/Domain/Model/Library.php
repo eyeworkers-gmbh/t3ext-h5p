@@ -104,9 +104,9 @@ class Library extends AbstractEntity
 
     // Inversed relations (not in DB)
     /**
-     * @var ObjectStorage<Content>
+     * @var ObjectStorage<Content>|null
      */
-    protected ObjectStorage $contents;
+    protected ?ObjectStorage $contents = null;
 
     /**
      * @var ObjectStorage<ContentDependency>
@@ -294,9 +294,9 @@ class Library extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage|null
      */
-    public function getContents(): ObjectStorage
+    public function getContents(): ?ObjectStorage
     {
         return $this->contents;
     }
